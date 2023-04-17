@@ -1,0 +1,56 @@
+<head>
+<style>
+	img {
+		width: 200px;
+	}
+
+	#gameBoard
+	{
+		cursor: url("hammer.cur"), auto !important;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div id = "gameBoard">
+<img id = "im1" src = "hole.png"><img id = "im2" src = "hole.png"><img id = "im3" src = "hole.png"><br>
+<img id = "im4" src = "hole.png"><img id = "im5" src = "hole.png"><img id = "im6" src = "hole.png"><br>
+<img id = "im7" src = "hole.png"><img id = "im8" src = "hole.png"><img id = "im9" src = "hole.png"><br>
+</div>
+score:<span id = "score">0</span>
+
+<script>
+
+let score = 0;
+
+function moveMole(){	
+let moleSpot = Math.floor(Math.random() * 9) + 1;
+
+
+//needs to be 10, otherwise mole gets stuck in last hole
+//this basically wipes the slate clean before placing a mole, so there won't be more than one on the screen a a time.
+for (let i = 1; i < 10; i++) {
+  document.getElementById("im" + i).setAttribute("src", "hole.png");
+  
+}
+
+//this places the mole in a new spot
+document.getElementById("im" + moleSpot).setAttribute("src", "mole.png");
+
+}
+
+setInterval(moveMole, 1000);
+
+
+
+$("img").click(function()
+{
+	if($(this).attr("src") == "mole.png")
+	{
+	$(this).attr("src", "whacked.png");
+	score++;
+	$("#score").text(score);	
+	}
+})
+</script>
+</body>
