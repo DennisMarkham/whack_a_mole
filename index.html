@@ -45,6 +45,8 @@ setInterval(moveMole, 1000);
 
 $("img").click(function()
 {
+	bonk.play();
+	
 	if($(this).attr("src") == "mole.png")
 	{
 	$(this).attr("src", "whacked.png");
@@ -52,5 +54,7 @@ $("img").click(function()
 	$("#score").text(score);	
 	}
 })
+
+const bonk = new Audio("bonk.mp3");
 </script>
 </body>
