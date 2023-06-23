@@ -22,6 +22,8 @@ score:<span id = "score">0</span>
 <script>
 
 let score = 0;
+const hit = new Audio("hit.flac");
+const miss = new Audio("miss.mp3");
 
 function moveMole(){	
 let moleSpot = Math.floor(Math.random() * 9) + 1;
@@ -60,7 +62,6 @@ $("img").click(function()
 	}
 })
 
-const hit = new Audio("hit.flac");
-const miss = new Audio("miss.mp3");
+
 </script>
 </body>
