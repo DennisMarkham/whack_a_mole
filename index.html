@@ -45,16 +45,22 @@ setInterval(moveMole, 1000);
 
 $("img").click(function()
 {
-	bonk.play();
+	
 	
 	if($(this).attr("src") == "mole.png")
 	{
+		hit.play()
 	$(this).attr("src", "whacked.png");
 	score++;
 	$("#score").text(score);	
 	}
+	else
+	{
+		miss.play()
+	}
 })
 
-const bonk = new Audio("bonk.mp3");
+const hit = new Audio("hit.flac");
+const miss = new Audio("miss.mp3");
 </script>
 </body>
