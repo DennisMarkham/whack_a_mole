@@ -51,7 +51,9 @@ $("img").click(function()
 	
 	if($(this).attr("src") == "mole.png")
 	{
-		hit.play()
+		hit.volume = 0.3;
+		hit.play();
+		
 	$(this).attr("src", "whacked.png");
 	score++;
 	$("#score").text(score);	
