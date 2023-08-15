@@ -62,6 +62,8 @@ $("img").click(function()
 	
 	if($(this).attr("src") == "mole.png")
 	{
+		hit.pause();
+		hit.currentTime = 0;
 		hit.volume = 0.3;
 		hit.play();
 		
