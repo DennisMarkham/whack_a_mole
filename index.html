@@ -23,6 +23,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
+<p>Timer Span</p>
+<p>Start Game:</p>
+<button onClick = "beginGame()" id = "begin">Infinite Time</button><button id = "stop" disabled>Stop</button>
 <div id = "gameBoard">
 <img id = "im1" src = "hole.png"><img id = "im2" src = "hole.png"><img id = "im3" src = "hole.png"><br>
 <img id = "im4" src = "hole.png"><img id = "im5" src = "hole.png"><img id = "im6" src = "hole.png"><br>
@@ -32,9 +35,13 @@ score:<span id = "score">0</span>
 
 <script>
 
+//knowing how to beign the game is easy enough, but how do we steop it.  
+function beginGame(){
 let score = 0;
 const hit = new Audio("hit.flac");
 const miss = new Audio("miss.mp3");
+$("#begin").prop("disabled", true);
+$("#stop").prop("disabled", false);
 
 function moveMole(){	
 let moleSpot = Math.floor(Math.random() * 9) + 1;
@@ -52,9 +59,19 @@ document.getElementById("im" + moleSpot).setAttribute("src", "mole.png");
 
 }
 
-setInterval(moveMole, 1000);
+const moleMovingInterval = setInterval(moveMole, 1000);
 
 
+//I'm putting the stop function inside the beginGame function, and having the event listener for the stop function spawned here
+$("#stop").click(function(){
+console.log("this function is firing")
+clearInterval(moleMovingInterval);
+score = 0;
+$("img").attr("src", "hole.png");
+$("#score").text(score);
+$("#stop").prop("disabled", true)
+$("#begin").prop("disabled", false)
+});
 
 $("img").click(function()
 {
@@ -78,6 +95,8 @@ $("img").click(function()
 		miss.play()
 	}
 })
+
+}
 
 
 </script>
