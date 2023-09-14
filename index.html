@@ -23,7 +23,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<p id = "timer"></p>
+<p>Timer: <span id = "timer">0</span></p>
 <p>Start Game:</p>
 <button onClick = "beginGame()" class = "begin">Infinite Time</button><button id = "stop" disabled>Stop</button>
 <br>
@@ -47,7 +47,7 @@ const timeInterval = setInterval(add2time, 1000);
 function add2time()
 {
 	time += 1;
-	$("#timerSpan").text(time);
+	$("#timer").text(time);
 }
 
 let score = 0;
