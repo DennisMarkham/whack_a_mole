@@ -23,9 +23,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<p>Timer Span</p>
+<p id = "timer"></p>
 <p>Start Game:</p>
-<button onClick = "beginGame()" id = "begin">Infinite Time</button><button id = "stop" disabled>Stop</button>
+<button onClick = "beginGame()" class = "begin">Infinite Time</button><button id = "stop" disabled>Stop</button>
+<br>
+<br>
+<br>
 <div id = "gameBoard">
 <img id = "im1" src = "hole.png"><img id = "im2" src = "hole.png"><img id = "im3" src = "hole.png"><br>
 <img id = "im4" src = "hole.png"><img id = "im5" src = "hole.png"><img id = "im6" src = "hole.png"><br>
@@ -37,10 +40,20 @@ score:<span id = "score">0</span>
 
 //knowing how to beign the game is easy enough, but how do we steop it.  
 function beginGame(){
+
+let time = 0;
+const timeInterval = setInterval(add2time, 1000);
+
+function add2time()
+{
+	time += 1;
+	$("#timerSpan").text(time);
+}
+
 let score = 0;
 const hit = new Audio("hit.flac");
 const miss = new Audio("miss.mp3");
-$("#begin").prop("disabled", true);
+$(".begin").prop("disabled", true);
 $("#stop").prop("disabled", false);
 
 function moveMole(){	
@@ -62,15 +75,26 @@ document.getElementById("im" + moleSpot).setAttribute("src", "mole.png");
 const moleMovingInterval = setInterval(moveMole, 1000);
 
 
-//I'm putting the stop function inside the beginGame function, and having the event listener for the stop function spawned here
-$("#stop").click(function(){
-console.log("this function is firing")
+//I'm putting the stoping function inside the beginGame function
+function cease_and_eval(){
+
+alert("You scored " + score + " points in " + time + " seconds, or " + (score/time).toFixed(4) + " points per second.")
+	//this is the ceasing
+	console.log("this function is firing")
 clearInterval(moleMovingInterval);
+clearInterval(timeInterval)
 score = 0;
+time = 0;
 $("img").attr("src", "hole.png");
 $("#score").text(score);
+$("#timer").text(time);
 $("#stop").prop("disabled", true)
-$("#begin").prop("disabled", false)
+$(".begin").prop("disabled", false)
+}
+
+//having the event listener for the stop function spawned here
+$("#stop").click(function(){
+cease_and_eval()
 });
 
 $("img").click(function()
